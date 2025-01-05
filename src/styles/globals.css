@@ -1,0 +1,98 @@
+body {
+    background-color: #f5f5f5;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  }
+  
+  .MuiAppBar-root {
+    background-color: #1976d2;
+  }
+  
+  .MuiDrawer-paper {
+    background-color: #fff;
+  }
+  
+  .dashboard-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .branch-table {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color:white; /* Blue background */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .container-bg {
+    background-image: url('https://wallpaperaccess.com/full/3289144.jpg');
+    background-size: cover; /* Ensures the image covers the container */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
+    
+  }
+  :root {
+    --primary-color: #1976d2;
+    --secondary-color: #f5f5f5;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --border-color: #e0e0e0;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+  }
+  
+  .logo-container img {
+    height: 40px;
+  }
+  
+  .sidebar-active {
+    background-color: #e3f2fd !important;
+    color: var(--primary-color) !important;
+  }
+  
+  .profile-menu {
+    min-width: 200px;
+  }
+  
+  .status-active {
+    color: #4caf50;
+    background-color: #e8f5e9;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+  
+  .action-icons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .MuiDataGrid-root {
+    border: none !important;
+    background-color: white;
+  }
+  
+  .MuiDataGrid-columnHeaders {
+    background-color: #f5f5f5;
+  }
+  
+  

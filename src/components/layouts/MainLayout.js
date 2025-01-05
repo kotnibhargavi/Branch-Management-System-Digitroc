@@ -5,35 +5,35 @@ import Header from '../Header';
 import Sidebar from '../Sidebar';
 
 
-console.log("MainLayout is rendering");
+
+
+const drawerWidth = 50; 
 
 const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => {
+  const handleToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
   return (
-    
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Header onToggleSidebar={toggleSidebar} />
-      <Box sx={{ display: 'flex', flex: 1 }}>
-        <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            width: '100%',
-            minHeight: 'calc(100vh - 64px)', // Subtract header height
-            backgroundColor: 'background.default'
-          }}
-        >
+    <Box sx={{ display: 'flex' }}>
+      <Header onToggleSidebar={handleToggleSidebar} />
+      <Sidebar open={sidebarOpen} onClose={handleToggleSidebar} />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          marginLeft: { sm: `${drawerWidth}px` },
+          marginTop: '64px', 
+        }}
+      >
           <Outlet />
         </Box>
       </Box>
-    </Box>
+    
      
 
   );

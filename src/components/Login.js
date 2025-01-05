@@ -1,90 +1,109 @@
 import React, { useState } from 'react';
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  MenuItem,
-  Avatar,
-  Box,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/contexts/AuthContext';
+import { TextField, Button, Checkbox, FormControlLabel, Typography, Box, Container } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from './contexts/AuthContext';
 
-const Header = ({ onToggleSidebar }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const { user, logout } = useAuth();
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleProfileClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-    handleClose();
+    if (username === 'barath' && password === '12345') {
+      localStorage.setItem('isAuthenticated', 'true');
+      if (rememberMe) {
+        localStorage.setItem('username', username);
+      }
+      login(username);
+      navigate('/dashboard');
+    } else {
+      alert('Invalid credentials');
+    }
   };
 
   return (
-    <AppBar 
-      position="fixed" 
-      sx={{ 
-        zIndex: (theme) => theme.zIndex.drawer + 1, 
-        backgroundColor: 'white',  // Change background color to white
-        boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)'  // Optional: subtle shadow
+    <Box
+      sx={{
+        minHeight: '100vh',
+        backgroundImage: `url(https://as1.ftcdn.net/v2/jpg/02/62/65/42/1000_F_262654251_bz9280VG76bCzXckAXs0oLVY3D7N95Wa.jpg)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      <Toolbar sx={{ paddingRight: 2 }}> {/* You can adjust padding if necessary */}
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={onToggleSidebar}
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-          <img
-            src="https://digitrac.sundharams.com/images/logos/digitrac_full_logo.png"
-            alt="DigiTrac"
-            style={{ height: '40px' }}
-          />
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Typography variant="subtitle1">{user?.username}</Typography>
-          <IconButton
-            onClick={handleProfileClick}
-            size="small"
-            sx={{ ml: 2 }}
-          >
-            <Avatar
-              alt={user?.username}
-              src="/placeholder.svg"
-              sx={{ width: 32, height: 32 }}
-            />
-          </IconButton>
-        </Box>
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-          PaperProps={{
-            className: 'profile-menu'
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.5)',
+            padding: '16px',
+            borderRadius: '8px',
+            backgroundColor: 'white',
           }}
         >
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </Menu>
-      </Toolbar>
-    </AppBar>
+          <Typography component="h1" variant="h5">
+            <img
+              src="https://digitrac.sundharams.com/images/logos/digitrac_full_logo.png"
+              alt="Logo"
+              style={{ width: '150px', marginBottom: '10px' }}
+            />
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Login
+            </Button>
+            <Link to="/forgot-password" variant="body2">
+              Forgot password?
+            </Link>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 
-export default Header;
+export default Login;

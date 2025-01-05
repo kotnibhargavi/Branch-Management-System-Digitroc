@@ -93,7 +93,12 @@ const BranchList = () => {
   };
 
   return (
-    <Box sx={{ height: isFullScreen ? '100vh' : 400, width: '100%', p: 3, display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ height: isFullScreen ? 'calc(100vh - 64px)' : 'calc(100vh - 128px)', 
+      width: '100%', 
+      p: 3, 
+      display: 'flex', 
+      flexDirection: 'column',
+      overflow: 'auto'  }}>
       <Typography variant="h4" gutterBottom>
         Branches
       </Typography>
